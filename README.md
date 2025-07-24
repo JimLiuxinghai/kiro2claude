@@ -1,4 +1,4 @@
-# Ki2API - Claude Sonnet 4 Claude AI兼容API
+# Ki2Claude - Claude Sonnet 4 Claude AI兼容API
 
 一个简单易用的Docker化Claude AI兼容API服务，专门用于Claude Sonnet 4模型。
 
@@ -10,6 +10,7 @@
 - 🌐 **Claude AI兼容** - 完全兼容Claude AI API格式
 - 📡 **流式传输** - 支持SSE流式响应
 - 🔄 **自动token刷新** - 支持token过期自动刷新
+- 🗂️ **自动读取token** - 自动从Kiro客户端读取token
 
 ## 快速开始
 
@@ -83,15 +84,15 @@ docker-compose down
 ### 使用Docker命令
 ```bash
 # 构建镜像
-docker build -t ki2api .
+docker build -t ki2claude .
 
 # 运行容器
 docker run -d \
   -p 8989:8989 \
   -e KIRO_ACCESS_TOKEN=your_token \
   -e KIRO_REFRESH_TOKEN=your_refresh_token \
-  --name ki2api \
-  ki2api
+  --name ki2claude \
+  ki2claude
 ```
 
 ## API端点
@@ -125,7 +126,7 @@ export KIRO_ACCESS_TOKEN=your_token
 export KIRO_REFRESH_TOKEN=your_refresh_token
 
 # 启动服务
-python app.py
+python claude_app.py
 ```
 
 ## 故障排除
@@ -147,16 +148,18 @@ python app.py
 ### 查看日志
 ```bash
 # Docker日志
-docker-compose logs -f ki2api
+docker-compose logs -f ki2claude
 
 # 本地日志
-python app.py 2>&1 | tee ki2api.log
+python claude_app.py 2>&1 | tee ki2claude.log
 ```
 
 ## 项目结构
 ```
-ki2api/
-├── app.py              # 主应用文件
+ki2claude/
+├── claude_app.py       # 主应用文件
+├── token_reader.py     # Token读取工具
+├── entrypoint.sh       # Docker入口脚本
 ├── Dockerfile          # Docker镜像定义
 ├── docker-compose.yml  # Docker Compose配置
 ├── requirements.txt    # Python依赖
