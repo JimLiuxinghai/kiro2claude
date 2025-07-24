@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ki2Claude - Claude Sonnet 4 API</title>
+    <style>
+        :root {
+            --primary-color: #4F46E5;
+            --secondary-color: #818CF8;
+            --dark-color: #1E293B;
+            --light-color: #F8FAFC;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --danger-color: #EF4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #F1F5F9;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #64748B;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #4338CA;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-start {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin: 3rem 0;
+        }
+        
+        .code-block {
+            background: #1E293B;
+            color: #F8FAFC;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.5rem 1rem;
+            background: #E2E8F0;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 0.5rem;
+        }
+        
+        .tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .language-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-color);
+            color: white;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="language-toggle" onclick="toggleLanguage()">中/EN</button>
+    
+    <header>
+        <h1 id="title">Ki2Claude - Claude Sonnet 4 API</h1>
+        <p id="header-subtitle" class="subtitle">A simple, Dockerized Claude AI compatible API service for Claude Sonnet 4 model</p>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h1 id="hero-title">Ki2Claude</h1>
+            <p id="hero-subtitle" class="subtitle">A Dockerized Claude AI compatible API service specifically for Claude Sonnet 4 model</p>
+            <a href="#quick-start" class="btn" id="get-started">Get Started</a>
+        </section>
+        
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🐳</div>
+                <h3 id="feature1-title" class="feature-title">Dockerized</h3>
+                <p id="feature1-desc">One-command startup with Docker. Simple and easy to deploy anywhere.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔑</div>
+                <h3 id="feature2-title" class="feature-title">Fixed API Key</h3>
+                <p id="feature2-desc">Use the fixed API key <code>ki2api-key-2024</code> for easy integration.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📡</div>
+                <h3 id="feature3-title" class="feature-title">Streaming Support</h3>
+                <p id="feature3-desc">Supports SSE streaming responses for real-time interaction.</p>
+            </div>
+        </section>
+        
+        <section id="quick-start" class="quick-start">
+            <h2 id="quick-start-title">Quick Start</h2>
+            <p id="quick-start-desc">Get started with Ki2Claude in just a few simple steps:</p>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('zero-config')">Zero Configuration</div>
+                <div class="tab" onclick="switchTab('manual')">Manual Setup</div>
+            </div>
+            
+            <div id="zero-config-content">
+                <p id="zero-config-desc">Simply ensure you're logged into Kiro, then start with one command:</p>
+                <div class="code-block">
+                    docker-compose up -d
+                </div>
+                <p id="service-info">The service will start at <a href="http://localhost:8989">http://localhost:8989</a></p>
+            </div>
+            
+            <div id="manual-content" style="display: none;">
+                <p id="manual-desc">For manual setup, build and run the Docker container:</p>
+                <div class="code-block">
+                    # Build the image<br>
+                    docker build -t ki2claude .<br><br>
+                    # Run the container<br>
+                    docker run -d \<br>
+                      -p 8989:8989 \<br>
+                      -e KIRO_ACCESS_TOKEN=your_token \<br>
+                      -e KIRO_REFRESH_TOKEN=your_refresh_token \<br>
+                      --name ki2claude \<br>
+                      ki2claude
+                </div>
+            </div>
+        </section>
+        
+        <section class="quick-start">
+            <h2 id="api-examples-title">API Examples</h2>
+            
+            <h3 id="list-models-title">List Models</h3>
+            <div class="code-block">
+                curl -H "Authorization: Bearer ki2api-key-2024" \<br>
+                     http://localhost:8989/v1/models
+            </div>
+            
+            <h3 id="chat-example-title">Chat Example</h3>
+            <div class="code-block">
+                curl -X POST http://localhost:8989/v1/messages \<br>
+                  -H "Authorization: Bearer ki2api-key-2024" \<br>
+                  -H "Content-Type: application/json" \<br>
+                  -d '{<br>
+                    "model": "claude-sonnet-4-20250514",<br>
+                    "messages": [<br>
+                      {"role": "user", "content": "Hello, introduce yourself"}<br>
+                    ],<br>
+                    "max_tokens": 1000<br>
+                  }'
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p id="footer-text">Ki2Claude - MIT License</p>
+    </footer>
+    
+    <script>
+        // Language data
+        const langData = {
+            en: {
+                title: "Ki2Claude - Claude Sonnet 4 API",
+                "header-subtitle": "A simple, Dockerized Claude AI compatible API service for Claude Sonnet 4 model",
+                "hero-title": "Ki2Claude",
+                "hero-subtitle": "A Dockerized Claude AI compatible API service specifically for Claude Sonnet 4 model",
+                "get-started": "Get Started",
+                "feature1-title": "Dockerized",
+                "feature1-desc": "One-command startup with Docker. Simple and easy to deploy anywhere.",
+                "feature2-title": "Fixed API Key",
+                "feature2-desc": "Use the fixed API key <code>ki2api-key-2024</code> for easy integration.",
+                "feature3-title": "Streaming Support",
+                "feature3-desc": "Supports SSE streaming responses for real-time interaction.",
+                "quick-start-title": "Quick Start",
+                "quick-start-desc": "Get started with Ki2Claude in just a few simple steps:",
+                "zero-config-desc": "Simply ensure you're logged into Kiro, then start with one command:",
+                "service-info": "The service will start at <a href=\"http://localhost:8989\">http://localhost:8989</a>",
+                "manual-desc": "For manual setup, build and run the Docker container:",
+                "api-examples-title": "API Examples",
+                "list-models-title": "List Models",
+                "chat-example-title": "Chat Example",
+                "footer-text": "Ki2Claude - MIT License"
+            },
+            zh: {
+                title: "Ki2Claude - Claude Sonnet 4 API",
+                "header-subtitle": "一个简单易用的Docker化Claude AI兼容API服务，专门用于Claude Sonnet 4模型",
+                "hero-title": "Ki2Claude",
+                "hero-subtitle": "一个简单易用的Docker化Claude AI兼容API服务，专门用于Claude Sonnet 4模型",
+                "get-started": "快速开始",
+                "feature1-title": "Docker化部署",
+                "feature1-desc": "一行命令启动服务。简单易部署，随处可运行。",
+                "feature2-title": "固定API密钥",
+                "feature2-desc": "使用固定API密钥 <code>ki2api-key-2024</code> 轻松集成。",
+                "feature3-title": "流式传输",
+                "feature3-desc": "支持SSE流式响应，实现实时交互。",
+                "quick-start-title": "快速开始",
+                "quick-start-desc": "只需几个简单步骤即可开始使用Ki2Claude：",
+                "zero-config-desc": "只需确保已登录Kiro，然后一键启动：",
+                "service-info": "服务将在 <a href=\"http://localhost:8989\">http://localhost:8989</a> 启动",
+                "manual-desc": "手动设置，构建并运行Docker容器：",
+                "api-examples-title": "API示例",
+                "list-models-title": "获取模型列表",
+                "chat-example-title": "对话示例",
+                "footer-text": "Ki2Claude - MIT许可证"
+            }
+        };
+        
+        // Current language
+        let currentLang = 'en';
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'zh' : 'en';
+            updateLanguage();
+        }
+        
+        // Update language
+        function updateLanguage() {
+            document.querySelectorAll('[id]').forEach(element => {
+                const id = element.id;
+                if (langData[currentLang][id]) {
+                    if (element.tagName === 'A') {
+                        // For links, we need to preserve the href but update the text
+                        element.innerHTML = langData[currentLang][id];
+                    } else {
+                        element.innerHTML = langData[currentLang][id];
+                    }
+                }
+            });
+            
+            // Update feature descriptions separately since they contain HTML
+            document.getElementById('feature1-desc').innerHTML = langData[currentLang]['feature1-desc'];
+            document.getElementById('feature2-desc').innerHTML = langData[currentLang]['feature2-desc'];
+            document.getElementById('feature3-desc').innerHTML = langData[currentLang]['feature3-desc'];
+            document.getElementById('service-info').innerHTML = langData[currentLang]['service-info'];
+        }
+        
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all content
+            document.getElementById('zero-config-content').style.display = 'none';
+            document.getElementById('manual-content').style.display = 'none';
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected content
+            document.getElementById(tabName + '-content').style.display = 'block';
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateLanguage();
+        });
+    </script>
+</body>
+</html>
