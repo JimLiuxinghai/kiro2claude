@@ -1,0 +1,41 @@
+{
+  "id": "chatcmpl-5e151dd9-fa3e-9236-9c9f-b8e060fed59f",
+  "object": "chat.completion.chunk",
+  "created": 1753367965,
+  "model": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+  "system_fingerprint": "",
+  "choices": [
+    {
+      "index": 0,
+      "delta": {
+        "role": null,
+        "content": "",
+        "tool_calls": [
+          {
+            "function": {
+              "arguments": "\\nCOPY"
+            },
+            "id": "",
+            "index": 0,
+            "type": "function"
+          }
+        ],
+        "function_calls": null,
+        "reasoning_content": ""
+      },
+      "finish_reason": null,
+      "message": {
+        "role": null,
+        "content": "",
+        "tool_calls": null,
+        "function_calls": null,
+        "reasoning_content": ""
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0
+  }
+}

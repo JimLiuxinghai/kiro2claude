@@ -1,0 +1,13 @@
+{
+  "id": "chatcmpl-89a080e5-0636-907e-81cb-3eadb3e03d50",
+  "object": "chat.completion.chunk",
+  "created": 1753367341,
+  "model": "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+  "system_fingerprint": "",
+  "choices": [],
+  "usage": {
+    "prompt_tokens": 15889,
+    "completion_tokens": 35,
+    "total_tokens": 15924
+  }
+}
